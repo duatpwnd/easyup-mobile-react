@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+기존의 Vue.js 로 만들어진 프로젝트를 react.js로 전환하는 사이드 프로젝트
 
 ## Available Scripts
 
