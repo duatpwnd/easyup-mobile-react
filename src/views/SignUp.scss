@@ -1,0 +1,100 @@
+#signup {
+  padding: 16px;
+  padding-top: 0;
+  margin-top: 13px;
+  h2 {
+    font-size: 18px;
+    margin-bottom: 13px;
+    color: #333333;
+  }
+  .noti {
+    color: #999999;
+    font-size: 1.25rem;
+    margin: 0 0 15px 0;
+  }
+  .blue_btn {
+    margin-top: 20px;
+    width: calc(100% - 35%);
+    float: right;
+    ::v-deep button {
+      width: 70%;
+    }
+  }
+  .row {
+    margin-top: 10px;
+    clear: both;
+
+    input,
+    textarea,
+    select {
+      font-family: "NotoSansCJKkr-Regular";
+      font-size: 14px;
+      width: calc(100% - 35%);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      padding: 5px 6px;
+      height: 32px;
+      line-height: 13px;
+      box-sizing: border-box;
+    }
+    select {
+      background: url("~src/assets/images/lec_list/arrow_ico.png") no-repeat 90%
+        center / 7px 5px;
+    }
+    textarea {
+      vertical-align: top;
+      resize: none;
+
+      height: 60px;
+      &::placeholder {
+        color: #666666;
+        font-size: 12px;
+      }
+    }
+
+    .dt {
+      width: 35%;
+      display: inline-block;
+      font-size: 14px;
+      font-family: "NotoSansCJKkr-Regular";
+      .required {
+        color: #114fff;
+      }
+    }
+  }
+  .agree {
+    width: calc(100% - 35%);
+    position: relative;
+    float: right;
+    color: #666666;
+    margin: 2% 0;
+    font-size: 1.125rem;
+    font-family: "NotoSansCJKkr-Regular";
+    &:after {
+      display: block;
+      content: "";
+      clear: both;
+    }
+    ::v-deep .container-checkbox {
+      width: 15px;
+      height: 15px;
+      position: unset;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+      input[type="checkbox"] + .checkmark {
+        width: 15px;
+        height: 15px;
+        display: inline-block;
+        padding: 0;
+        position: unset;
+      }
+    }
+    label[for="check"] {
+      display: inline-block;
+      font-size: 0.8em;
+      vertical-align: middle;
+    }
+  }
+}

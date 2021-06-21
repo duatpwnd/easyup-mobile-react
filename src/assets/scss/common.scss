@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+
+ul {
+  li {
+    list-style: none;
+  }
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+img {
+  vertical-align: middle;
+  width: 100%;
+}
+button {
+  background: white;
+  outline: none;
+  border: 0;
+}
+textarea {
+  outline: none;
+  -webkit-appearance: none;
+}
+h1 {
+  font-family: "NotoSansCJKkr-Bold";
+}
+h2 {
+  font-family: "NotoSansCJKkr-Medium";
+}
+h3,
+span,
+a {
+  font-family: "NotoSansCJKkr-Regular";
+}
+h4,
+p {
+  font-family: "NotoSansCJKkr-DemiLight";
+}
+/* 아이폰 input 둥근테두리 그림자 제거 */
+
+input {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+/* select 화살표 없애기 */
+
+select {
+  background: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+select::-ms-expand {
+  display: none;
+}
+fieldset {
+  border: 0;
+}
+legend {
+  display: none;
+}

@@ -1,0 +1,74 @@
+.menu_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  width: 72.222%;
+  max-width: 720px;
+  box-sizing: border-box;
+  background: white;
+  height: 100%;
+
+  .profile {
+    padding: 4.445%;
+    text-align: center;
+    .profile_ico {
+      width: 33.773%;
+      display: inline-block;
+      border-radius: 100%;
+      overflow: hidden;
+    }
+    h2 {
+      margin-top: 6%;
+      font-size: 2rem;
+    }
+    h3 {
+      font-size: 1.25rem;
+      color: #999999;
+    }
+  }
+  .lnb_menu {
+    border-top: 4px solid #f8f8f8;
+    border-bottom: 4px solid #f8f8f8;
+    padding: 4.445%;
+    border-top: 4px solid #f8f8f8;
+    border-bottom: 4px solid #f8f8f8;
+    .lnb {
+      text-align: left;
+      width: 100%;
+      margin-top: 4%;
+      font-size: 1.5rem;
+      font-family: "NotoSansCJKkr-Regular";
+    }
+    .arrow {
+      background: url("~src/assets/images/common/right_arrow.png") no-repeat
+        right center / 3%;
+    }
+  }
+  .support {
+    padding-bottom: 0;
+    padding: 4.445%;
+    button {
+      width: 100%;
+      text-align: left;
+      font-size: 1.5rem;
+      display: block;
+    }
+    .faq_btn {
+      margin: 4% 0;
+    }
+  }
+  .logout {
+    background: white;
+    padding: 4.445%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    .base-button {
+      font-size: 1.5rem;
+      height: 40px;
+      line-height: 32px;
+    }
+  }
+}

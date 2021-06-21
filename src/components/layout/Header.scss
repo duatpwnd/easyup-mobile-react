@@ -1,0 +1,64 @@
+#nav {
+  position: sticky;
+  text-align: center;
+  height: 50px;
+  top: 0;
+  background: white;
+  z-index: 4;
+  .back-btn {
+    position: absolute;
+    top: 0;
+    left: 13.445%;
+    bottom: 0;
+    height: 30%;
+    margin: auto;
+  }
+  .easyup-logo {
+    height: 19px;
+    width: 114px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    img {
+      vertical-align: unset;
+    }
+  }
+  .easyup-menu-btn {
+    width: 24px;
+    height: 19px;
+    position: absolute;
+    top: 0;
+    left: 16px;
+    bottom: 0;
+    margin: auto;
+  }
+  .right_menu {
+    .myclass {
+      position: absolute;
+      top: 0;
+      right: 48px;
+      bottom: 0;
+      margin: auto;
+      width: 24px;
+      height: 19px;
+      img {
+        vertical-align: unset;
+      }
+    }
+    .msg {
+      position: absolute;
+      top: 0;
+      right: 16px;
+      bottom: 0;
+      margin: auto;
+      width: 24px;
+      height: 19px;
+      img {
+        vertical-align: unset;
+      }
+    }
+  }
+}
