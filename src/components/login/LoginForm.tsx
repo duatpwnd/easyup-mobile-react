@@ -10,8 +10,8 @@ import * as toggle from "src/action/toggle"
 
 const LoginForm = () => {
     const [isLogin, loginComplete] = useState(true)
-    const [id, setId] = useState("");
-    const [pwd, setPwd] = useState("");
+    const [userid, setId] = useState("");
+    const [userpw, setPwd] = useState("");
     const [cookies, setCookie] = useCookies();
     const dispatch = useDispatch();
     const menuToggle = (): void => {
@@ -20,14 +20,21 @@ const LoginForm = () => {
     const login = () => {
         console.log('login');
         const data = {
-            id: id,
-            pwd: pwd
+            action: "login",
+            userid: userid,
+            userpw: userpw
         }
-        setCookie('userId', id, { maxAge: 2000 });
-        loginComplete(false)
-        // axios.post("", data).then((result) => {
-        //     console.log(result);
-        // })
+        console.log(data);
+        if (userid.trim().length == 0 || userpw.trim().length == 0) {
+            dispatch(toggle.guideMsgModal({ message: "아이디 또는 비밀번호를 입력해주세요" }));
+        } else {
+
+
+            axios.post("/main/mobileAPI/v1.php", JSON.stringify(data)).then((result) => {
+                setCookie('user_info', result.data.data[0]);
+                loginComplete(false)
+            })
+        }
     }
     return (isLogin ? <div className="menu-modal">
         <form className="login-form">
@@ -37,7 +44,7 @@ const LoginForm = () => {
                     type="text"
                     className="user_id"
                     placeholder="사용자명"
-                    value={id}
+                    value={userid}
                     onChange={(e) => {
                         setId(e.currentTarget.value);
                     }}
@@ -47,7 +54,7 @@ const LoginForm = () => {
                     className="user-pw"
                     placeholder="패스워드"
                     autoComplete="true"
-                    value={pwd}
+                    value={userpw}
                     onChange={(e) => {
                         setPwd(e.currentTarget.value);
                     }}

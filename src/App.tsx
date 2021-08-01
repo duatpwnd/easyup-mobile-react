@@ -8,12 +8,13 @@ import Store from "src/reducers/index"
 import { Route } from "react-router-dom";
 import SignUp from './views/SignUp';
 import Main from './views/Main';
-import CsCenter from "./views/CsCenter.jsx"
-import MyClass from "./views/MyClass.jsx"
+import CsCenter from "./views/CsCenter"
+import MyClass from "./views/MyClass"
+import GuideMsgModal from "src/components/common/GuideMsgModal"
 import * as toggle from "src/action/toggle"
 
 const App = () => {
-  const { loginModal, mask } = useSelector((state: ReturnType<typeof Store>) => {
+  const { loginModal, mask, guideMsgModal } = useSelector((state: ReturnType<typeof Store>) => {
     return state.toggleState
   })
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const App = () => {
       <Header></Header>
       {mask ? <div className="mask" onClick={maskToggle}></div> : null}
       {loginModal ? <LoginModal></LoginModal> : null}
+      {guideMsgModal ? <GuideMsgModal></GuideMsgModal> : null}
       <Route path="/" component={Main}></Route>
       <Route path="/signUp" component={SignUp}></Route>
       <Route path="/pwFind"></Route>

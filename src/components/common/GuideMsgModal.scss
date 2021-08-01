@@ -1,0 +1,23 @@
+.modal {
+  background: white;
+  max-width: 720px;
+  width: 80%;
+  padding: 10px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  .contents {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .blue_btn {
+    text-align: center;
+    .ok {
+      width: 50%;
+    }
+  }
+}

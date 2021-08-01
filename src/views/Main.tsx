@@ -6,6 +6,7 @@ import { useCookies } from 'react-cookie';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import BaseSearchInput from 'src/components/common/BaseSearchInput';
 import Category from 'src/components/main/Category';
+import RecommendLecture from 'src/components/main/RecommendLecture';
 import SwiperCore, {
     Autoplay
 } from 'swiper/core';
@@ -39,7 +40,6 @@ const Main = () => {
                 });
             }
         });
-        console.log(cookies.search_title.num, title.current.length);
         if (cookies.search_title == undefined) {
             setCookie('search_title', {
                 num: 0,
@@ -88,6 +88,7 @@ const Main = () => {
                 </BaseSearchInput>
             </div>
             <Category></Category>
+            <RecommendLecture lecture={list.popular_lecture}></RecommendLecture>
         </main >
     )
 }

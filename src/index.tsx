@@ -8,11 +8,15 @@ import rootReducer from "src/reducers";
 import { createStore } from "redux";
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 const store = createStore(rootReducer);
+const cookieParser = JSON.parse(Cookies.get("user_info"));
 axios.defaults.baseURL = "https://www.easyupclass.com"
 axios.interceptors.request.use(request => {
-  console.log('인터셉터 요청전:', request);
-  // Edit request config
+  request.headers.Authorization =
+    "Bearer " + cookieParser.access_token;
+  request.headers.common["Authorization"] =
+    "Bearer " + cookieParser.access_token;
   return request;
 }, error => {
   console.log(error);
@@ -20,7 +24,6 @@ axios.interceptors.request.use(request => {
 });
 
 axios.interceptors.response.use(response => {
-  console.log('인터셉터 요청후:', response);
   // Edit response config
   return response;
 }, error => {
