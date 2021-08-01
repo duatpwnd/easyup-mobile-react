@@ -1,15 +1,22 @@
 import { useState } from 'react';
 import "./LoginForm.scss"
-import BaseButton from "components/common/BaseButton"
+import BaseButton from "src/components/common/BaseButton"
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import LoginGnb from "components/login/LoginGnb"
+import LoginGnb from "src/components/login/LoginGnb"
+import { useDispatch } from "react-redux";
+import * as toggle from "src/action/toggle"
+
 const LoginForm = () => {
     const [isLogin, loginComplete] = useState(true)
     const [id, setId] = useState("");
     const [pwd, setPwd] = useState("");
     const [cookies, setCookie] = useCookies();
+    const dispatch = useDispatch();
+    const menuToggle = (): void => {
+        dispatch(toggle.loginModal());
+    }
     const login = () => {
         console.log('login');
         const data = {
@@ -49,7 +56,7 @@ const LoginForm = () => {
             </fieldset>
         </form>
         <div className="user-find">
-            <Link to="/signUp">
+            <Link to="/signUp" onClick={menuToggle}>
                 <span >회원가입</span>
             </Link>
             <Link to="/pwFind">

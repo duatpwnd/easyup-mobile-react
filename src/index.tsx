@@ -7,7 +7,26 @@ import { Provider } from "react-redux";
 import rootReducer from "src/reducers";
 import { createStore } from "redux";
 import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
 const store = createStore(rootReducer);
+axios.defaults.baseURL = "https://www.easyupclass.com"
+axios.interceptors.request.use(request => {
+  console.log('인터셉터 요청전:', request);
+  // Edit request config
+  return request;
+}, error => {
+  console.log(error);
+  return Promise.reject(error);
+});
+
+axios.interceptors.response.use(response => {
+  console.log('인터셉터 요청후:', response);
+  // Edit response config
+  return response;
+}, error => {
+  console.log(error);
+  return Promise.reject(error);
+});
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

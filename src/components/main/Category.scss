@@ -1,0 +1,25 @@
+#category {
+  padding: 40px 0;
+  h3 {
+    font-size: 12px;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .category-list {
+    &:last-child {
+      padding-top: 25px;
+    }
+    a {
+      vertical-align: middle;
+      text-align: center;
+      display: inline-block;
+      width: 25%;
+      img {
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+}

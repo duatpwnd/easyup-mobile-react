@@ -1,0 +1,8 @@
+@import "swiper/swiper.scss";
+.slide {
+  position: relative;
+  margin-top: 8px;
+  .swiper-slide {
+    margin: 0 auto;
+  }
+}
