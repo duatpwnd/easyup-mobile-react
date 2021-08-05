@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link } from "react-router-dom";
-import axios from 'axios';
 import "./Main.scss"
 import { useCookies } from 'react-cookie';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,11 +7,12 @@ import BaseSearchInput from 'src/components/common/BaseSearchInput';
 import Category from 'src/components/main/Category';
 import RecommendLecture from 'src/components/main/RecommendLecture';
 import Channel from 'src/components/main/Channel';
+import Hoc from 'src/components/Hoc';
 import SwiperCore, {
     Autoplay
 } from 'swiper/core';
 SwiperCore.use([Autoplay]);
-const Main = () => {
+const Main = ({ data }) => {
     const title = useRef([
         "이지업에서 쉽고 빠르게 성장하세요!",
         "소스도 먼저 코딩하는 놈이 낫다",
@@ -22,7 +22,6 @@ const Main = () => {
         "짰슈?",
         "응 짰슈.",
     ])
-    const [list, listSet] = useState<{ [key: string]: any }>({})
     const [keyword, search] = useState("");
     const [cookies, setCookie, removeCookie] = useCookies();
     useEffect(() => {
@@ -46,13 +45,6 @@ const Main = () => {
                 num: 0,
             });
         }
-        const data = {
-            action: "main_page_list",
-        };
-        axios.post("/main/mobileAPI/v1.php", JSON.stringify(data)).then((result) => {
-            console.log('메인페이지 api:', result);
-            listSet(result.data.data);
-        })
     }, [])
     return (
         <main >
@@ -67,7 +59,7 @@ const Main = () => {
                 onSwiper={(swiper) => ""}
                 onSlideChange={() => ""}
             >
-                {list.banner != undefined ? list.banner.map((item, index) => (
+                {data.banner != undefined ? data.banner.map((item, index) => (
                     <SwiperSlide key={index}>
                         <img src={item.image_url} />
                     </SwiperSlide>
@@ -89,9 +81,11 @@ const Main = () => {
                 </BaseSearchInput>
             </div>
             <Category></Category>
-            <RecommendLecture lecture={list.popular_lecture}></RecommendLecture>
-            <Channel channel={list.techblog_post}></Channel>
+            <RecommendLecture lecture={data.popular_lecture}></RecommendLecture>
+            <Channel channel={data.techblog_post}></Channel>
         </main >
     )
 }
-export default Main
+export default Hoc({
+    action: "main_page_list",
+})(Main)
