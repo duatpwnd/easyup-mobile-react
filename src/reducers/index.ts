@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
-import { toggleState } from "./toggle";
+import { modalState } from "./modal";
+import { userInfoSet } from "./userInfo";
 const rootReducer = combineReducers({
-  toggleState,
+  modalState,
+  userInfoSet,
 });
 
 export default rootReducer;
