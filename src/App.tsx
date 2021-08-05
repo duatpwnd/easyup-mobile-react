@@ -12,6 +12,7 @@ import SignUp from './views/SignUp';
 import Main from './views/Main';
 import CsCenter from "./views/CsCenter"
 import MyClass from "./views/MyClass"
+import LectureDetail from "./views/LectureDetail"
 import GuideMsgModal from "src/components/common/GuideMsgModal"
 import * as toggle from "src/action/modal"
 import * as user from "src/action/userInfo"
@@ -39,11 +40,12 @@ const App = () => {
       {mask ? <div className="mask" onClick={maskToggle}></div> : null}
       {loginModal ? <LoginModal></LoginModal> : null}
       {guideMsgModal ? <GuideMsgModal></GuideMsgModal> : null}
-      <Route path="/" component={Main}></Route>
+      <Route exact path="/" component={Main}></Route>
       <Route path="/signUp" component={SignUp}></Route>
       <Route path="/pwFind"></Route>
       <Route path="/csCenter" component={CsCenter}></Route>
       <Route path="/myClass" component={MyClass}></Route>
+      <Route path="/LectureDetail" component={LectureDetail}></Route>
       <Footer></Footer>
     </div>
   )
