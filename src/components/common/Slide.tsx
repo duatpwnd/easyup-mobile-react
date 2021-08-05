@@ -1,4 +1,4 @@
-import "./Slide.scss"
+import "./Slide.scoped.scss"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import axios from 'axios';
 const Slide = (props: { [key: string]: any }) => {

@@ -1,52 +1,51 @@
 import { Link } from "react-router-dom";
-import "./RecommendLecture.scss"
+import "./RecommendLecture.scoped.scss"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 SwiperCore.use([Navigation]);
 const RecommendLecture = (prop) => {
-    console.log(prop);
-    return (
-        <div className="section swiper_section" >
-            <div className="title-header">
-                <h2 className="title">추천 강의</h2>
-                <span className="more-view-btn" >전체보기</span
-                >
+  return (
+    <div className="section swiper_section" >
+      <div className="title-header">
+        <h2 className="title">추천 강의</h2>
+        <span className="more-view-btn" >전체보기</span
+        >
+      </div>
+      <Swiper
+        spaceBetween={8}
+        slidesPerView={2}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        onSwiper={(swiper) => ""}
+        onSlideChange={() => ""}
+      >
+        {prop.lecture != undefined ? prop.lecture.map((item, index) => (
+          <SwiperSlide key={index} className="slide">
+            <div className="item">
+              <span className="lecture-list">
+                <img src={item.image_url} />
+              </span>
+              <div className="evaluate">
+                <h4 >{item.teachers}</h4>
+                <h2 className="subtitle">{item.title}</h2>
+                <span className="score">{item.ranking}</span>
+                {item.price.is_free ? <h1 className="free">
+                  FREE
+                </h1> : <span className="price" >
+                  {item.price.format_original != item.price.format_final ? <del
+                    className="original"
+                  >{item.price.format_original}</del> : ""
+                  }
+                  <span className="final">{item.price.format_final}</span>
+                </span>
+                }
+              </div>
             </div>
-            <Swiper
-                spaceBetween={8}
-                slidesPerView={2}
-                navigation
-                pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => ""}
-                onSlideChange={() => ""}
-            >
-                {prop.lecture != undefined ? prop.lecture.map((item, index) => (
-                    <SwiperSlide key={index} className="slide">
-                        <div className="item">
-                            <span className="lecture-list">
-                                <img src={item.image_url} />
-                            </span>
-                            <div className="evaluate">
-                                <h4 >{item.teachers}</h4>
-                                <h2 className="subtitle">{item.title}</h2>
-                                <span className="score">{item.ranking}</span>
-                                {item.price.is_free ? <h1 className="free">
-                                    FREE
-                                </h1> : <span className="price" >
-                                    {item.price.format_original != item.price.format_final ? <del
-                                        className="original"
-                                    >{item.price.format_original}</del> : ""
-                                    }
-                                    <span className="final">{item.price.format_final}</span>
-                                </span>
-                                }
-                            </div>
-                        </div>
-                    </SwiperSlide>
-                )) : ""}
-            </Swiper>
-            {/* <Slide :swiper_option="slide_option.recommand_lecture">
+          </SwiperSlide>
+        )) : ""}
+      </Swiper>
+      {/* <Slide :swiper_option="slide_option.recommand_lecture">
       <template slot="list">
         <swiper-slide
           v-for="(list, index) in list.popular_lecture"
@@ -99,8 +98,8 @@ const RecommendLecture = (prop) => {
         ></div>
       </template>
     </Slide> */}
-        </div >
-    )
+    </div >
+  )
 
 }
 export default RecommendLecture

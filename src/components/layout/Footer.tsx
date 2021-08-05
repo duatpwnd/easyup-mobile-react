@@ -1,6 +1,6 @@
 import FooterLogo from 'src/assets/images/main/footer_logo.png'
 import { withRouter } from "react-router-dom";
-import "./Footer.scss"
+import "./Footer.scoped.scss"
 const Footer = withRouter(({ match, location }) => {
     const arr = ["/signUp", "/signUpComplete", "/play"]
     if (arr.indexOf(location.pathname) >= 0) {

@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import "./LoginForm.scss"
 import BaseButton from "src/components/common/BaseButton"
-import { Link } from "react-router-dom";
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import Store from "src/reducers/index"
 import LoginGnb from "src/components/login/LoginGnb"
-import { useDispatch } from "react-redux";
-import * as toggle from "src/action/toggle"
+import * as toggle from "src/action/modal"
+import * as user from "src/action/userInfo"
 
 const LoginForm = () => {
-    const [isLogin, loginComplete] = useState(true)
     const [userid, setId] = useState("");
     const [userpw, setPwd] = useState("");
     const [cookies, setCookie] = useCookies();
@@ -18,25 +19,26 @@ const LoginForm = () => {
         dispatch(toggle.loginModal());
     }
     const login = () => {
-        console.log('login');
         const data = {
             action: "login",
-            userid: userid,
-            userpw: userpw
+            userid: "admin",
+            userpw: "dnlwmvpdl#0119"
         }
-        console.log(data);
-        if (userid.trim().length == 0 || userpw.trim().length == 0) {
+        if (data.userid.trim().length == 0 || data.userpw.trim().length == 0) {
             dispatch(toggle.guideMsgModal({ message: "아이디 또는 비밀번호를 입력해주세요" }));
         } else {
 
 
             axios.post("/main/mobileAPI/v1.php", JSON.stringify(data)).then((result) => {
+                console.log(result)
+                dispatch(user.userInfoSet({
+                    userInfo: result.data.data[0].info
+                }))
                 setCookie('user_info', result.data.data[0]);
-                loginComplete(false)
             })
         }
     }
-    return (isLogin ? <div className="menu-modal">
+    return <div className="menu-modal">
         <form className="login-form">
             <fieldset>
                 <legend>로그인정보</legend>
@@ -44,7 +46,7 @@ const LoginForm = () => {
                     type="text"
                     className="user_id"
                     placeholder="사용자명"
-                    value={userid}
+                    value="admin"
                     onChange={(e) => {
                         setId(e.currentTarget.value);
                     }}
@@ -54,7 +56,7 @@ const LoginForm = () => {
                     className="user-pw"
                     placeholder="패스워드"
                     autoComplete="true"
-                    value={userpw}
+                    value="dnlwmvpdl#0119"
                     onChange={(e) => {
                         setPwd(e.currentTarget.value);
                     }}
@@ -87,6 +89,6 @@ const LoginForm = () => {
                 <button>1:1문의</button>
             </Link>
         </div>
-    </div> : <LoginGnb></LoginGnb>)
+    </div>
 }
 export default LoginForm

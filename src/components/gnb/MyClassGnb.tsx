@@ -1,6 +1,6 @@
-import "./MyClassGnb.scss"
+import "./MyClassGnb.scoped.scss"
 import { useDispatch } from "react-redux";
-import * as toggle from "src/action/toggle"
+import * as toggle from "src/action/modal"
 
 const MyClassGnb = () => {
     const dispatch = useDispatch();

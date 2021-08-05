@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import Logo from 'src/assets/images/main/logo.png'
-import './Header.scss'
+import './Header.scoped.scss'
 import MenuButton from 'src/assets/images/main/menu_btn.png'
-import * as toggle from "src/action/toggle"
+import * as toggle from "src/action/modal"
 import { Link } from "react-router-dom";
 
 const Header = () => {

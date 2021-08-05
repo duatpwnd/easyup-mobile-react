@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Category.scss"
+import "./Category.scoped.scss"
 import Category1 from 'src/assets/images/main/main_category_ico1.png'
 import Category2 from 'src/assets/images/main/main_category_ico2.png'
 import Category3 from 'src/assets/images/main/main_category_ico3.png'

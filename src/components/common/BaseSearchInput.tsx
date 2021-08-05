@@ -1,7 +1,6 @@
 
-import "./BaseSearchInput.scss"
+import "./BaseSearchInput.scoped.scss"
 const BaseSearchInput = (props: { [key: string]: any }) => {
-    console.log(props);
     return <div className="search">
         {props.left}
         <input type="text" className="search-input" placeholder={props.placeholder} />
