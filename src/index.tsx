@@ -5,18 +5,23 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import rootReducer from "src/reducers";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie';
-const store = createStore(rootReducer);
-const cookieParser = JSON.parse(Cookies.get("user_info"));
+import Cookies from 'universal-cookie';
+import { createLogger } from "redux-logger"
+const cookies = new Cookies();
+const logger = createLogger()
+const store = createStore(rootReducer, applyMiddleware(logger));
 axios.defaults.baseURL = "https://www.easyupclass.com"
 axios.interceptors.request.use(request => {
-  request.headers.Authorization =
-    "Bearer " + cookieParser.access_token;
-  request.headers.common["Authorization"] =
-    "Bearer " + cookieParser.access_token;
+  const userInfo = cookies.get("user_info")
+  if (userInfo != undefined) {
+    request.headers.Authorization =
+      "Bearer " + userInfo.access_token;
+    request.headers.common["Authorization"] =
+      "Bearer " + userInfo.access_token;
+  }
   return request;
 }, error => {
   console.log(error);
