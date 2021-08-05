@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import BaseSearchInput from 'src/components/common/BaseSearchInput';
 import Category from 'src/components/main/Category';
 import RecommendLecture from 'src/components/main/RecommendLecture';
+import Channel from 'src/components/main/Channel';
 import SwiperCore, {
     Autoplay
 } from 'swiper/core';
@@ -49,7 +50,7 @@ const Main = () => {
             action: "main_page_list",
         };
         axios.post("/main/mobileAPI/v1.php", JSON.stringify(data)).then((result) => {
-            console.log(result);
+            console.log('메인페이지 api:', result);
             listSet(result.data.data);
         })
     }, [])
@@ -63,7 +64,7 @@ const Main = () => {
                 }}
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
+                onSwiper={(swiper) => ""}
                 onSlideChange={() => ""}
             >
                 {list.banner != undefined ? list.banner.map((item, index) => (
@@ -89,6 +90,7 @@ const Main = () => {
             </div>
             <Category></Category>
             <RecommendLecture lecture={list.popular_lecture}></RecommendLecture>
+            <Channel channel={list.techblog_post}></Channel>
         </main >
     )
 }
