@@ -1,4 +1,5 @@
 const CracoAlias = require("craco-alias");
+const ScopedScss = require("craco-plugin-scoped-css");
 module.exports = {
   plugins: [
     {
@@ -9,6 +10,9 @@ module.exports = {
         tsConfigPath: "tsconfig.paths.json",
         debug: false,
       },
+    },
+    {
+      plugin: ScopedScss,
     },
   ],
 };
