@@ -1,0 +1,48 @@
+.notice {
+  padding: 4.445%;
+  .search {
+    .search_contents {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+  h2 {
+    font-size: 1.375rem;
+    margin-top: 2.5%;
+    .num {
+      color: #114fff;
+    }
+  }
+  .title_wrap {
+    span {
+      text-align: right;
+    }
+  }
+  .item_wrap {
+    li {
+      &:after {
+        display: block;
+        content: "";
+        clear: both;
+      }
+      padding: 2%;
+      &:nth-child(even) {
+        background: #f8f8f8;
+      }
+      span {
+        color: #333333;
+        font-size: 1.25rem;
+      }
+      .left {
+        float: left;
+        width: 70%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .right {
+        float: right;
+      }
+    }
+  }
+}
