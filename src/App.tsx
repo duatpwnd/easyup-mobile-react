@@ -14,6 +14,7 @@ import CsCenter from "./views/CsCenter"
 import MyClass from "./views/MyClass"
 import LectureDetail from "./views/LectureDetail"
 import GuideMsgModal from "src/components/common/GuideMsgModal"
+import LectureList from "src/views/LectureList"
 import * as toggle from "src/action/modal"
 import * as user from "src/action/userInfo"
 
@@ -46,6 +47,7 @@ const App = () => {
       <Route path="/csCenter" component={CsCenter}></Route>
       <Route path="/myClass" component={MyClass}></Route>
       <Route path="/LectureDetail" component={LectureDetail}></Route>
+      <Route path="/category" component={LectureList}></Route>
       <Footer></Footer>
     </div>
   )
