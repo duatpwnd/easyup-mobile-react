@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Main.scss"
 import { useCookies } from 'react-cookie';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -24,6 +24,19 @@ const Main = ({ data }) => {
     ])
     const [keyword, search] = useState("");
     const [cookies, setCookie, removeCookie] = useCookies();
+    const history = useHistory();
+    const lectureSearch = () => {
+        history.push({
+            pathname: "/category",
+            state: {
+                action: "get_course_list",
+                pageCurrent: 1,
+                order: "type_date",
+                keyword: keyword,
+                category_code: "ALL",
+            }
+        })
+    }
     useEffect(() => {
         // 새로고침감지
         const isOnIOS =
@@ -71,13 +84,7 @@ const Main = ({ data }) => {
                 <h2 className="main-title">
                     {cookies.search_title != undefined ? title.current[cookies.search_title.num] : ""}
                 </h2>
-                <BaseSearchInput placeholder="배우고 싶은 강의를 입력해보세요."
-                    right={
-                        <button
-                            className="search-btn"
-                        ></button>
-                    }
-                >
+                <BaseSearchInput placeholder="배우고 싶은 강의를 입력해보세요." keywordEvent={search} buttonEvent={lectureSearch} >
                 </BaseSearchInput>
             </div>
             <Category></Category>
