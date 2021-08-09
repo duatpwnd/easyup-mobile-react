@@ -29,7 +29,7 @@ const LoginForm = () => {
         } else {
 
 
-            axios.post("/main/mobileAPI/v1.php", JSON.stringify(data)).then((result) => {
+            axios.post("", JSON.stringify(data)).then((result) => {
                 console.log(result)
                 dispatch(user.userInfoSet({
                     userInfo: result.data.data[0].info
@@ -68,7 +68,7 @@ const LoginForm = () => {
             <Link to="/signUp" onClick={menuToggle}>
                 <span >회원가입</span>
             </Link>
-            <Link to="/pwFind">
+            <Link to="/pwFind" onClick={menuToggle}>
                 <span className="forget"
                 >비밀번호 분실</span>
             </Link>
@@ -79,13 +79,13 @@ const LoginForm = () => {
             <button className="blog">이지채널</button>
         </div>
         <div className="support">
-            <Link to="/csCenter/notice">
+            <Link to="/csCenter/notice/1" onClick={menuToggle}>
                 <button>공지사항</button>
             </Link>
-            <Link to="/csCenter/faq">
+            <Link to="/csCenter/faq" onClick={menuToggle}>
                 <button className="faq-btn">FAQ</button>
             </Link>
-            <Link to="/csCenter/inquiry">
+            <Link to="/csCenter/inquiry" onClick={menuToggle}>
                 <button>1:1문의</button>
             </Link>
         </div>
