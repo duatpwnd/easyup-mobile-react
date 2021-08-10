@@ -13,7 +13,7 @@ const CsCenter = ({ match, location }) => {
             <NavLink to="/csCenter/notice" activeStyle={activeStyle} className="tab"><span className="bar"></span>공지사항</NavLink>
             <NavLink to="/csCenter/faq" activeStyle={activeStyle} className="tab"><span className="bar"></span>FAQ</NavLink>
             <NavLink to="/csCenter/inquiry" activeStyle={activeStyle} className="tab"><span className="bar"></span>1:1문의</NavLink>
-            <Route path={`${match.path}/notice/:paging`} component={NoticeList}></Route>
+            <Route path={`${match.path}/notice`} component={NoticeList}></Route>
         </div>
     )
 }
