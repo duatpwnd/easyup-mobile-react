@@ -8,8 +8,16 @@ const RecommendLecture = (prop) => {
     <div className="section swiper_section" >
       <div className="title-header">
         <h2 className="title">추천 강의</h2>
-        <span className="more-view-btn" >전체보기</span
-        >
+        <Link to={{
+          pathname: "/category", state: {
+            title: "전체",
+            category_code: "ALL",
+            action: "get_course_list",
+            keyword: "",
+            pageCurrent: 1,
+            order: 'type_rating',
+          }
+        }} className="more-view-btn" >전체보기</Link>
       </div>
       <Swiper
         spaceBetween={8}
@@ -52,59 +60,6 @@ const RecommendLecture = (prop) => {
           </SwiperSlide>
         )) : ""}
       </Swiper>
-      {/* <Slide :swiper_option="slide_option.recommand_lecture">
-      <template slot="list">
-        <swiper-slide
-          v-for="(list, index) in list.popular_lecture"
-          :key="index"
-        >
-          <LecItem
-            @click.native="
-              $router.push({
-                path: '/lecDetail',
-                query: {
-                  id: list.id,
-                },
-              })
-            "
-          >
-            <span className="lec_list" slot="router">
-              <img
-                :src="list.image_url"
-                :alt="list.title"
-                :title="list.title"
-              />
-            </span>
-            <h4 slot="teacher">{{ list.teachers }}</h4>
-            <h2 className="subtitle" slot="subtitle" v-html="list.title"></h2>
-            <span slot="grade" className="score">{{ list.ranking }}</span>
-            <h1 className="free" slot="free" v-if="list.price.is_free">
-              FREE
-            </h1>
-            <span className="price" v-else slot="free">
-              <del
-                className="original"
-                v-if="list.price.format_original != list.price.format_final"
-                >{{ list.price.format_original }}</del
-              >
-              <span className="final">{{ list.price.format_final }}</span>
-            </span>
-          </LecItem>
-        </swiper-slide>
-      </template>
-      <template slot="nav_btn">
-        <div
-          className="swiper-button-prev swiper-button-prev-3"
-          slot="button-prev"
-          @click.stop=""
-        ></div>
-        <div
-          className="swiper-button-next swiper-button-next-3"
-          slot="button-next"
-          @click.stop=""
-        ></div>
-      </template>
-    </Slide> */}
     </div >
   )
 
