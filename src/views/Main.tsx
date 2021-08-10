@@ -5,6 +5,7 @@ import { useCookies } from 'react-cookie';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import BaseSearchInput from 'src/components/common/BaseSearchInput';
 import Category from 'src/components/main/Category';
+import LatestLecture from 'src/components/main/LatestLecture';
 import RecommendLecture from 'src/components/main/RecommendLecture';
 import Channel from 'src/components/main/Channel';
 import Hoc from 'src/components/Hoc';
@@ -90,6 +91,7 @@ const Main = ({ data }) => {
             <Category></Category>
             <RecommendLecture lecture={data.popular_lecture}></RecommendLecture>
             <Channel channel={data.techblog_post}></Channel>
+            <LatestLecture lecture={data.latest_lecture}></LatestLecture>
         </main >
     )
 }
