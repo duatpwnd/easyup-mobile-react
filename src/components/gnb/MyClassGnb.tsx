@@ -6,7 +6,7 @@ const MyClassGnb = () => {
     const dispatch = useDispatch();
     const mask = () => {
         console.log('클릭');
-        dispatch(toggle.maskModal({ mask: true }))
+        dispatch(toggle.modalAction({ mask: true }))
     }
     return (
         <div className="myclass-gnb">

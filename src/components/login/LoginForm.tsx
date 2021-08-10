@@ -16,7 +16,11 @@ const LoginForm = () => {
     const [cookies, setCookie] = useCookies();
     const dispatch = useDispatch();
     const menuToggle = (): void => {
-        dispatch(toggle.loginModal());
+        dispatch(toggle.modalAction({
+            loginModal: false,
+            mask: false,
+        }
+        ));
     }
     const login = () => {
         const data = {
@@ -25,7 +29,7 @@ const LoginForm = () => {
             userpw: "dnlwmvpdl#0119"
         }
         if (data.userid.trim().length == 0 || data.userpw.trim().length == 0) {
-            dispatch(toggle.guideMsgModal({ message: "아이디 또는 비밀번호를 입력해주세요" }));
+            dispatch(toggle.modalAction({ guideMessage: "아이디 또는 비밀번호를 입력해주세요" }));
         } else {
 
 
@@ -79,7 +83,7 @@ const LoginForm = () => {
             <button className="blog">이지채널</button>
         </div>
         <div className="support">
-            <Link to="/csCenter/notice/1" onClick={menuToggle}>
+            <Link to="/csCenter/notice" onClick={menuToggle}>
                 <button>공지사항</button>
             </Link>
             <Link to="/csCenter/faq" onClick={menuToggle}>
