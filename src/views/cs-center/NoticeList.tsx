@@ -5,12 +5,15 @@ import BaseSearchInput from "src/components/common/BaseSearchInput";
 import Pagination from "src/components/common/Pagination";
 import "./NoticeList.scoped.scss"
 const NoticeList = ({ match, location }) => {
+    const locationState = location.state
+    console.log(locationState);
     const [list, listUpdate] = useState<{ [key: string]: any }>({})
 
     useEffect(() => {
+        console.log('use');
         const data = {
             action: "get_cs_list", //필수
-            current: match.params.paging, //필수
+            current: locationState == null ? 1 : locationState.pageCurrent, //필수
             type: "notice",
             keyword: "", //옵션
         };
@@ -20,7 +23,7 @@ const NoticeList = ({ match, location }) => {
                 console.log(result);
                 listUpdate(result.data.data)
             });
-    }, [match.params.paging])
+    }, [location.state])
     if (list.list != undefined) {
         return (
             <div className="notice">
@@ -40,7 +43,12 @@ const NoticeList = ({ match, location }) => {
 
                     )}
                 </ul>
-                <Pagination to={"/csCenter/notice/"} current={`${match.params.paging}`} total={`${list.total_page}`}></Pagination>
+                <Pagination to={{
+                    action: "get_cs_list", //필수
+                    current: locationState == null ? 1 : locationState.pageCurrent, //필수
+                    type: "notice",
+                    keyword: "", //옵션
+                }} total={`${list.total_page}`}></Pagination>
             </div>
         )
     } else {
