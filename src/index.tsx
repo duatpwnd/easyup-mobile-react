@@ -12,7 +12,7 @@ import Cookies from 'universal-cookie';
 import { createLogger } from "redux-logger"
 const cookies = new Cookies();
 const logger = createLogger()
-const store = createStore(rootReducer, applyMiddleware(logger));
+export const store = createStore(rootReducer, applyMiddleware(logger));
 axios.defaults.baseURL = "https://www.easyupclass.com/main/mobileAPI/v1.php"
 axios.interceptors.request.use(request => {
   const userInfo = cookies.get("user_info")

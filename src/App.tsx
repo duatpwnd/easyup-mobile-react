@@ -24,17 +24,16 @@ const App = () => {
   })
   const dispatch = useDispatch();
   const maskToggle = () => {
-    dispatch(toggle.maskModal({ mask: false }))
+    dispatch(toggle.modalAction({ loginModal: false, mask: false }))
   }
   const [cookies, setCookie] = useCookies();
   useEffect(() => {
     if (cookies.user_info != null) {
-      console.log('유저정보있습니다.');
       dispatch(user.userInfoSet({
         userInfo: cookies.user_info.info
       }))
     }
-  })
+  }, [])
   return (
     <div className="app">
       <Header></Header>
@@ -49,6 +48,7 @@ const App = () => {
       <Route path="/LectureDetail" component={LectureDetail}></Route>
       <Route path="/category" component={LectureList}></Route>
       <Footer></Footer>
+
     </div>
   )
 }

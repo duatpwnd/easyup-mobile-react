@@ -1,5 +1,5 @@
 import * as toggle from "src/action/modal";
-import { createReducer, ActionType } from "typesafe-actions";
+import { createReducer } from "typesafe-actions";
 interface StateType {
   guideMessage?: string;
   loginModal?: boolean;
@@ -13,18 +13,8 @@ const initialState: StateType = {
   mask: false,
 };
 export const modalState = createReducer(initialState, {
-  [toggle.LOGIN_MODAL]: (state) => ({
-    loginModal: !state.loginModal,
-    mask: !state.mask,
+  [toggle.MODAL_CHANGE]: (state, action) => ({
+    ...state,
+    ...action.payload,
   }),
-  [toggle.GUIDE_MESSAGE_MODAL]: (state, action) => ({
-    guideMsgModal: true,
-    guideMessage: action.payload.message,
-    mask: true,
-  }),
-  [toggle.MASK]: (state, action) => {
-    return {
-      mask: action.payload.mask,
-    };
-  },
 });
