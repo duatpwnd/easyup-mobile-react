@@ -23,7 +23,12 @@ const RecommendLecture = (prop) => {
         {prop.lecture != undefined ? prop.lecture.map((item, index) => (
           <SwiperSlide key={index} className="slide">
             <div className="item">
-              <Link to={`/lectureDetail?id=${item.id}`}>
+              <Link to={{
+                pathname: "/lectureDetail",
+                state: {
+                  id: item.id
+                }
+              }}>
                 <span className="lecture-list">
                   <img src={item.image_url} />
                 </span>

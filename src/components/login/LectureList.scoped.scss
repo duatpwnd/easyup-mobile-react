@@ -1,0 +1,43 @@
+.menu_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 72.222%;
+  height: 100%;
+  box-sizing: border-box;
+  background: #f8f8f8;
+  h3 {
+    font-size: 1.5rem;
+    padding: 10px 0;
+    color: #999999;
+    text-align: center;
+    font-weight: 500;
+    height: 32px;
+    line-height: 32px;
+    .back {
+      width: 7px;
+      height: 100%;
+      margin-right: 12px;
+      background: url("~src/assets/images/common/left_arrow.png") no-repeat
+        center 8px / 7px 12.5px;
+      vertical-align: middle;
+      line-height: 0;
+    }
+  }
+  .list {
+    background: white;
+    padding: 4.445%;
+    li {
+      &:not(:first-child) {
+        margin-top: 10px;
+      }
+      span {
+        font-size: 1.5rem;
+        display: block;
+        background: url("~src/assets/images/common/right_arrow.png") no-repeat
+          right center / 7px 12.5px;
+      }
+    }
+  }
+}

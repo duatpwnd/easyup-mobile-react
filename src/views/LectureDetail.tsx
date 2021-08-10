@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import queryString from "query-string";
 import axios from 'axios';
 import "./LectureDetail.scss"
 import Ratings from 'react-ratings-declarative';
 const LectureDetail = ({ location }) => {
     const [detail, setDetail] = useState<{ [key: string]: any }>({})
-    const query = queryString.parse(location.search);
     const body = {
         action: "get_course_info",
-        course_id: query.id
+        course_id: location.state.id
     }
     useEffect(() => {
         axios
