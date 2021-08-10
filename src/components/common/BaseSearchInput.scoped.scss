@@ -1,5 +1,4 @@
 .search {
-  margin-top: 2%;
   position: relative;
   &:after {
     display: block;
@@ -22,12 +21,11 @@
     border: 1px solid #333333;
     color: black;
     font-size: 1.25rem;
-    width: 70%;
+    width: 100%;
     line-height: 2.3;
     padding: 0 1.755%;
     padding-right: 10%;
     box-sizing: border-box;
-    margin-left: 2%;
     outline: none;
     // background: url("~@/assets/images/lec_list/search_btn.png") no-repeat 95%
     //   center / 12px 12px;
