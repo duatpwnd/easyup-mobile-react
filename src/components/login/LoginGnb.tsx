@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Store from "src/reducers/index"
-import LoginForm from "components/login/LoginForm"
+import LectureList from "components/login/LectureList"
 import * as user from "src/action/userInfo"
 const LoginGnb = () => {
-    const [isLogout, logoutComplete] = useState('login')
+    const [lectureList, lectureListActive] = useState('off')
     const [cookies, setCookie, removeCookie] = useCookies();
     const dispatch = useDispatch();
     const userInfo = useSelector((state: ReturnType<typeof Store>) => {
@@ -16,13 +16,12 @@ const LoginGnb = () => {
     })
     const logout = () => {
         removeCookie('user_info');
-        logoutComplete('logout')
         dispatch(user.userInfoSet({
             userInfo: null
         }))
     }
     return (
-        isLogout == 'login' ? <div className="menu_modal">
+        lectureList == "off" ? <div className="menu_modal">
             <div className="profile">
                 <span className="profile_ico">
                     <img
@@ -35,7 +34,7 @@ const LoginGnb = () => {
                 <h3>{userInfo.email}</h3>
             </div>
             <div className="lnb_menu">
-                <button className="lnb arrow">강의</button>
+                <button className="lnb arrow" onClick={() => lectureListActive('on')}>강의</button>
                 <button
                     className="lnb arrow">
                     코스
@@ -81,7 +80,8 @@ const LoginGnb = () => {
             <div className="logout">
                 <BaseButton name='로그아웃' handleClick={logout}></BaseButton>
             </div>
-        </div> : <LoginForm></LoginForm>
+        </div> : <LectureList></LectureList>
+
     )
 }
 export default LoginGnb
