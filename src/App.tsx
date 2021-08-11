@@ -37,9 +37,9 @@ const App = () => {
   return (
     <div className="app">
       <Header></Header>
-      {mask ? <div className="mask" onClick={maskToggle}></div> : null}
-      {loginModal ? <LoginModal></LoginModal> : null}
-      {guideMsgModal ? <GuideMsgModal></GuideMsgModal> : null}
+      {mask && <div className="mask" onClick={maskToggle}></div>}
+      {loginModal && <LoginModal></LoginModal>}
+      {guideMsgModal && <GuideMsgModal></GuideMsgModal>}
       <Route exact path="/" component={Main}></Route>
       <Route path="/signUp" component={SignUp}></Route>
       <Route path="/pwFind"></Route>

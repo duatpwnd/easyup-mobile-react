@@ -3,50 +3,67 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import "./LectureDetail.scoped.scss"
 import Ratings from 'react-ratings-declarative';
+import BaseButton from 'src/components/common/BaseButton';
+const CurrList = ({ li, detail }) => {
+    const [isActive, toggle] = useState(false);
+    return (
+        <div onClick={() => { toggle(!isActive) }}>
+            <span className={`full-title ${li.children_count == null ? "" : "not-full-title"}`}>
+                <span className="lec-title-section" dangerouslySetInnerHTML={{ __html: li.title }}></span>
+                {/* 즉시실행함수
+                    (function () {
+                        실행 문장
+                    })();
+                */}
+                {(() => {
+                    if (li.up_status == 1 && detail.isApprove == 0) {
+                        <span className="ing-ico">변환중</span>
+                    } else if (li.up_status == 2 && detail.isApprove == 0) {
+                        <span className="complete-ico">완료</span>
+                    }
+                })()}
+            </span>
+            {li.children_count != null && <span className="lec_num"> {li.children_count}개</span>}
+            {/* 커리큘럼 하위리스트 */}
+            {detail.curriculum_list.type == "section" &&
+                isActive && <div className="child-list">
+                    {li.children_list.map((child) =>
+                        <div
+                            className="child-list-title"
+                            key={child.title}
+                        >
+                            <span className="child-title-section" dangerouslySetInnerHTML={{ __html: child.title }}></span>
+                            <span
+                                className="ing-ico"
+                            >변환중</span
+                            >
+                            <span
+                                className="complete-ico"
+                            >완료</span
+                            >
+                        </div>
+                    )}
+                </div>
+            }
+        </div>
+    )
+};
 const LectureDetail = ({ location }) => {
     const [detail, setDetail] = useState<{ [key: string]: any }>({})
     const body = {
         action: "get_course_info",
         course_id: location.state.id
     }
-    const CurrList = ({ li }) => {
-        const [isActive, toggle] = useState(false);
-        return (
-            <div key={li.title} onClick={() => { toggle(!isActive) }}>
-                <span className={`full-title ${li.children_count == null ? "" : "not-full-title"}`}>
-                    <span className="lec-title-section" dangerouslySetInnerHTML={{ __html: li.title }}></span>
-                    {() => {
-                        if (li.up_status == 1 && detail.isApprove == 0) {
-                            <span className="ing-ico">변환중</span>
-                        } else if (li.up_status == 2 && detail.isApprove == 0) {
-                            <span className="complete-ico">완료</span>
-                        }
-                    }}
-                </span>
-                {li.children_count != null && <span className="lec_num"> {li.children_count}개</span>}
-                {/* 커리큘럼 하위리스트 */}
-                {detail.curriculum_list.type == "section" &&
-                    isActive && <div className="child-list">
-                        {li.children_list.map((child) =>
-                            <div
-                                className="child-list-title"
-                                key={child.title}
-                            >
-                                <span className="child-title-section" dangerouslySetInnerHTML={{ __html: child.title }}></span>
-                                <span
-                                    className="ing-ico"
-                                >변환중</span
-                                >
-                                <span
-                                    className="complete-ico"
-                                >완료</span
-                                >
-                            </div>
-                        )}
-                    </div>
-                }
-            </div>
-        )
+    // 구독 여부 조회
+    const subscribeCheck = () => {
+        const data = {
+            action: "check_subscribe_course",
+            course_id: location.state.id
+        }
+        axios
+            .post("", JSON.stringify(data)).then((result) => {
+                console.log(result);
+            })
     }
     useEffect(() => {
         axios
@@ -65,7 +82,7 @@ const LectureDetail = ({ location }) => {
                     title="파이썬 코딩 기본편"
                     src={detail.course_image}
                 />
-                <div className="update-noti">
+                <div className="date-info">
                     <span
                     >{detail.creation_date}(업데이트 일자:{
                             detail.update_date
@@ -119,6 +136,18 @@ const LectureDetail = ({ location }) => {
                             )}
                         </div>
                     </div>
+                    <div id="subscribe">
+                        <div>
+                            <div className="subscribe_wrap">
+                                {/* 강의를 구매한경우  */}
+                                <BaseButton name="강의 보러가기"></BaseButton>
+                                {/* 무료강의인경우 */}
+                                <BaseButton name="구매하기"></BaseButton>
+                                {/* 강의 구매를 안한경우 */}
+                                <BaseButton name="구매하기"></BaseButton>
+                            </div>
+                        </div>
+                    </div>
                 </section>
                 <section className="section2">
                     <div className="user_intro">
@@ -159,9 +188,16 @@ const LectureDetail = ({ location }) => {
                     </div>
                     <div className="curriculum_list">
                         {detail.curriculum_list.items.map((li, index) =>
-                            <CurrList li={li} key={index}></CurrList>
+                            <CurrList li={li} detail={detail} key={index} />
                         )}
                     </div>
+                </div>
+                <div className="teacher-intro">
+                    <h2 className="teacher-intro-title">강사소개</h2>
+                    <div
+                        className="teacher-intro-contents"
+                        dangerouslySetInnerHTML={{ __html: detail.teachers.profile_info }}
+                    ></div>
                 </div>
             </div>
         )
