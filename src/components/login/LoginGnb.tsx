@@ -8,7 +8,7 @@ import Store from "src/reducers/index"
 import LectureList from "components/login/LectureList"
 import * as user from "src/action/userInfo"
 const LoginGnb = () => {
-    const [lectureList, lectureListActive] = useState('off')
+    const [lectureList, lectureListActive] = useState(false)
     const [cookies, setCookie, removeCookie] = useCookies();
     const dispatch = useDispatch();
     const userInfo = useSelector((state: ReturnType<typeof Store>) => {
@@ -21,7 +21,7 @@ const LoginGnb = () => {
         }))
     }
     return (
-        lectureList == "off" ? <div className="menu_modal">
+        lectureList == false ? <div className="menu_modal">
             <div className="profile">
                 <span className="profile_ico">
                     <img
@@ -34,7 +34,7 @@ const LoginGnb = () => {
                 <h3>{userInfo.email}</h3>
             </div>
             <div className="lnb_menu">
-                <button className="lnb arrow" onClick={() => lectureListActive('on')}>강의</button>
+                <button className="lnb arrow" onClick={() => lectureListActive(true)}>강의</button>
                 <button
                     className="lnb arrow">
                     코스
@@ -80,7 +80,7 @@ const LoginGnb = () => {
             <div className="logout">
                 <BaseButton name='로그아웃' handleClick={logout}></BaseButton>
             </div>
-        </div> : <LectureList></LectureList>
+        </div> : <LectureList eventHandler={lectureListActive}></LectureList>
 
     )
 }

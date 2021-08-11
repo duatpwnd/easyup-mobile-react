@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
 import { loginModal } from "src/util/index";
-const LectureList = () => {
+const LectureList = (props) => {
     const [list, listUpdate] = useState<{ [key: string]: any }>({})
     const history = useHistory();
     const goToLectureList = (title, index) => {
@@ -38,7 +38,7 @@ const LectureList = () => {
     }, [])
     return (
         <div className="menu_modal">
-            <h3 ><button className="back"></button>이전 메뉴로 돌아가기</h3>
+            <h3 onClick={() => { props.eventHandler(false) }}><button className="back" ></button>이전 메뉴로 돌아가기</h3>
             <ul className="list">
                 <li>
                     <span onClick={() => { goToLectureList('전체', 'ALL') }}>전체보기</span>
