@@ -1,9 +1,11 @@
 import { useEffect, useState, useMemo } from 'react';
+import { useSelector, shallowEqual } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import "./LectureDetail.scoped.scss"
 import Ratings from 'react-ratings-declarative';
 import BaseButton from 'src/components/common/BaseButton';
+import Store from "src/reducers/index"
 const CurrList = ({ li, detail }) => {
     const [isActive, toggle] = useState(false);
     return (
@@ -49,11 +51,12 @@ const CurrList = ({ li, detail }) => {
     )
 };
 const LectureDetail = ({ location }) => {
+    console.log('리랜');
     const [detail, setDetail] = useState<{ [key: string]: any }>({})
-    const body = {
-        action: "get_course_info",
-        course_id: location.state.id
-    }
+    const [subsInfo, subsCheck] = useState({ isSubscribe: false, isPossibleReview: false });
+    const userInfo = useSelector((state: ReturnType<typeof Store>) => {
+        return (state.userInfoSet.userInfo) as { [key: string]: any }
+    })
     // 구독 여부 조회
     const subscribeCheck = () => {
         const data = {
@@ -63,9 +66,20 @@ const LectureDetail = ({ location }) => {
         axios
             .post("", JSON.stringify(data)).then((result) => {
                 console.log(result);
-            })
+                subsCheck(result.data.data)
+            });
     }
     useEffect(() => {
+        if (userInfo != null) {
+            subscribeCheck();
+        }
+    }, [userInfo])
+
+    useEffect(() => {
+        const body = {
+            action: "get_course_info",
+            course_id: location.state.id
+        }
         axios
             .post("", JSON.stringify(body))
             .then((result) => {
@@ -139,12 +153,20 @@ const LectureDetail = ({ location }) => {
                     <div id="subscribe">
                         <div>
                             <div className="subscribe_wrap">
-                                {/* 강의를 구매한경우  */}
-                                <BaseButton name="강의 보러가기"></BaseButton>
-                                {/* 무료강의인경우 */}
-                                <BaseButton name="구매하기"></BaseButton>
-                                {/* 강의 구매를 안한경우 */}
-                                <BaseButton name="구매하기"></BaseButton>
+                                {(() => {
+                                    if (subsInfo.isSubscribe || (subsInfo.isSubscribe == false && detail.is_teacher)) {
+                                        {/* 강의를 구매한경우  */ }
+                                        return <BaseButton className="active_subscribe" name="강의 보러가기"></BaseButton>
+                                    } else if (detail.price.is_free) {
+                                        {/* 무료강의인경우 */ }
+                                        return <BaseButton name="구매하기"></BaseButton>
+                                    } else if (subsInfo.isSubscribe == false && detail.price.is_free == false) {
+                                        console.log('여기다');
+                                        {/* 강의 구매를 안한경우 */ }
+                                        return <BaseButton name="구매하기"></BaseButton>
+                                    }
+                                }
+                                )()}
                             </div>
                         </div>
                     </div>

@@ -29,10 +29,8 @@ const LoginForm = () => {
             userpw: "dnlwmvpdl#0119"
         }
         if (data.userid.trim().length == 0 || data.userpw.trim().length == 0) {
-            dispatch(toggle.modalAction({ guideMessage: "아이디 또는 비밀번호를 입력해주세요" }));
+            dispatch(toggle.modalAction({ guideMsgModal: true, guideMessage: "아이디 또는 비밀번호를 입력해주세요" }));
         } else {
-
-
             axios.post("", JSON.stringify(data)).then((result) => {
                 console.log(result)
                 dispatch(user.userInfoSet({

@@ -29,7 +29,18 @@ axios.interceptors.request.use(request => {
 });
 
 axios.interceptors.response.use(response => {
-  // Edit response config
+  if (response.data.type == "token") {
+    // 토큰이없을경우 마지막 url 기억
+    // store.commit("userStore/referer", router.currentRoute.fullPath);
+    store.dispatch({
+      type: "modal/MODAL_CHANGE",
+      payload: {
+        guideMsgModal: true,
+        guideMessage: "아이디 또는 비밀번호를 입력해주세요"
+      }
+    });
+    // Vue.logOut();
+  }
   return response;
 }, error => {
   console.log(error);
