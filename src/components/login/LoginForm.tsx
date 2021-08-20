@@ -11,6 +11,7 @@ import * as toggle from "src/action/modal"
 import * as user from "src/action/userInfo"
 
 const LoginForm = () => {
+    console.log('LoginForm========================================');
     const [userid, setId] = useState("");
     const [userpw, setPwd] = useState("");
     const [cookies, setCookie] = useCookies();

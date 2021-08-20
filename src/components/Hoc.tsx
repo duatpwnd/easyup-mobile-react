@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import React from 'react';
 
 const withHOC = (param) => (WrappedComponent) => {
+  console.log('HOC========================================');
   const Component = props => {
     const [data, dataSet] = useState<{ [key: string]: any }>({})
     useEffect(() => {
@@ -13,6 +15,9 @@ const withHOC = (param) => (WrappedComponent) => {
     return <WrappedComponent data={data} />
 
   }
-  return Component
+  return React.memo(Component, (prev, next) => {
+    console.log(prev, next);
+    return true;
+  })
 }
 export default withHOC;

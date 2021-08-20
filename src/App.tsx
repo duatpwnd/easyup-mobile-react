@@ -19,8 +19,18 @@ import * as toggle from "src/action/modal"
 import * as user from "src/action/userInfo"
 
 const App = () => {
+  console.log('App========================================');
   const { loginModal, mask, guideMsgModal } = useSelector((state: ReturnType<typeof Store>) => {
     return state.modalState
+  }, (next, prev) => {
+    console.log(next, prev);
+    if (next != prev) {
+      console.log('다르다');
+      return false;
+    } else {
+      console.log('같다');
+      return true;
+    }
   })
   const dispatch = useDispatch();
   const maskToggle = () => {
@@ -28,6 +38,7 @@ const App = () => {
   }
   const [cookies, setCookie] = useCookies();
   useEffect(() => {
+    console.log('use');
     if (cookies.user_info != null) {
       dispatch(user.userInfoSet({
         userInfo: cookies.user_info.info

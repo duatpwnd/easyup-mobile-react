@@ -7,7 +7,10 @@ import { Link } from "react-router-dom";
 import Store from "src/reducers/index"
 import LectureList from "components/login/LectureList"
 import * as user from "src/action/userInfo"
+import React from "react";
+
 const LoginGnb = () => {
+    console.log('LoginGnb========================================');
     const [lectureList, lectureListActive] = useState(false)
     const [cookies, setCookie, removeCookie] = useCookies();
     const dispatch = useDispatch();
@@ -84,4 +87,4 @@ const LoginGnb = () => {
 
     )
 }
-export default LoginGnb
+export default React.memo(LoginGnb)

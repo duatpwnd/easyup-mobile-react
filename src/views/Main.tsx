@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { Link, useHistory } from "react-router-dom";
 import "./Main.scss"
 import { useCookies } from 'react-cookie';
@@ -14,6 +15,7 @@ import SwiperCore, {
 } from 'swiper/core';
 SwiperCore.use([Autoplay]);
 const Main = ({ data }) => {
+    console.log('Main========================================', data);
     const title = useRef([
         "이지업에서 쉽고 빠르게 성장하세요!",
         "소스도 먼저 코딩하는 놈이 낫다",
