@@ -15,9 +15,6 @@ const withHOC = (param) => (WrappedComponent) => {
     return <WrappedComponent data={data} />
 
   }
-  return React.memo(Component, (prev, next) => {
-    console.log(prev, next);
-    return true;
-  })
+  return Component
 }
 export default withHOC;

@@ -99,4 +99,10 @@ const Main = ({ data }) => {
 }
 export default Hoc({
     action: "main_page_list",
-})(Main)
+})(React.memo(Main, (prev, next) => {
+    if (prev.data != next.data) {
+        return false;
+    } else {
+        return true;
+    }
+}))
