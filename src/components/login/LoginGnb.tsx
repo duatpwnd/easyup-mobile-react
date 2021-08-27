@@ -15,6 +15,7 @@ const LoginGnb = () => {
     const [cookies, setCookie, removeCookie] = useCookies();
     const dispatch = useDispatch();
     const userInfo = useSelector((state: ReturnType<typeof Store>) => {
+        console.log(state);
         return (state.userInfoSet.userInfo) as { [key: string]: any }
     })
     const logout = () => {
@@ -47,7 +48,12 @@ const LoginGnb = () => {
                 >
                     이지채널
                 </button>
-                <Link to="myClass">
+                <Link to={{
+                    pathname: "/myClass",
+                    state: {
+                        view: userInfo.status == 1 ? "teacher" : "student",
+                    }
+                }}>
                     <button
                         className="lnb arrow"
                     >

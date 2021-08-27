@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useCallback } from 'react';
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
 import "./LoginForm.scss"
 import BaseButton from "src/components/common/BaseButton"
 import axios from 'axios';
-import Store from "src/reducers/index"
-import LoginGnb from "src/components/login/LoginGnb"
+import React from 'react';
 import * as toggle from "src/action/modal"
 import * as user from "src/action/userInfo"
 
@@ -23,14 +22,17 @@ const LoginForm = () => {
         }
         ));
     }
+    // admin
+    // dnlwmvpdl#0119
     const login = () => {
+        console.log(userid, userpw);
         const data = {
             action: "login",
             userid: "admin",
             userpw: "dnlwmvpdl#0119"
         }
         if (data.userid.trim().length == 0 || data.userpw.trim().length == 0) {
-            dispatch(toggle.modalAction({ guideMsgModal: true, guideMessage: "아이디 또는 비밀번호를 입력해주세요" }));
+            dispatch(toggle.modalAction({ guideMsgModal: true, guideMessage: "아이디 또는 비밀번호를 입력해주세요", mask: true }));
         } else {
             axios.post("", JSON.stringify(data)).then((result) => {
                 console.log(result)
@@ -41,6 +43,7 @@ const LoginForm = () => {
             })
         }
     }
+
     return <div className="menu-modal">
         <form className="login-form">
             <fieldset>
@@ -49,7 +52,7 @@ const LoginForm = () => {
                     type="text"
                     className="user_id"
                     placeholder="사용자명"
-                    value="admin"
+                    value={userid}
                     onChange={(e) => {
                         setId(e.currentTarget.value);
                     }}
@@ -59,7 +62,7 @@ const LoginForm = () => {
                     className="user-pw"
                     placeholder="패스워드"
                     autoComplete="true"
-                    value="dnlwmvpdl#0119"
+                    value={userpw}
                     onChange={(e) => {
                         setPwd(e.currentTarget.value);
                     }}
