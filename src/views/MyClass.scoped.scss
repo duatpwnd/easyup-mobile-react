@@ -1,8 +1,97 @@
-.profile {
-  border-radius: 50%;
-  overflow: hidden;
-  width: 80px;
-  height: 80px;
-  display: inline-block;
-  vertical-align: middle;
+.user-info {
+  background: #343536;
+  width: 100%;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  .profile {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .info {
+    width: calc(100% - 110px);
+    vertical-align: middle;
+    display: inline-block;
+    margin-left: 30px;
+    .name {
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 18px;
+    }
+    .class {
+      font-weight: 500;
+      font-size: 18px;
+      font-weight: 100;
+      margin-left: 3%;
+    }
+    .email {
+      color: #999999;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .report {
+      font-size: 12px;
+      font-weight: 600;
+      color: #114fff;
+      border-radius: 4px;
+      margin-right: 5%;
+      width: 38%;
+      padding: 0 10px;
+      height: 25px;
+      line-height: 27px;
+      display: inline-block;
+      box-sizing: border-box;
+      background: url("~src/assets/images/common/profile_active_ico.png")
+        no-repeat 100%-10 center/ 12px 12px;
+      background-color: white;
+      span {
+        font-weight: 600;
+      }
+    }
+    .convert {
+      font-size: 12px;
+      font-weight: 600;
+      color: #114fff;
+      border-radius: 4px;
+      width: 38%;
+      padding: 0 4.5px;
+      height: 25px;
+      line-height: 27px;
+      display: inline-block;
+      margin-right: 0;
+      background: url("~src/assets/images/mylecture_room/convert_ico.png")
+        no-repeat 100%-4.5 center / 11.5px 9px;
+      background-color: white;
+    }
+    .update_date {
+      font-size: 1rem;
+      color: #757677;
+      margin-top: 3%;
+    }
+  }
+}
+.course_info {
+  &:after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+  li {
+    float: left;
+    width: 25%;
+    text-align: center;
+    color: white;
+    background-color: #29292a;
+    padding: 11px;
+    box-sizing: border-box;
+    h3,
+    span {
+      font-size: 10px;
+      font-weight: 500;
+      color: #dbdbdb;
+    }
+  }
 }
