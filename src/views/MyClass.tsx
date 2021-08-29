@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 const UserProfile = ({ props }) => {
+    console.log("유저프로필@@@@@@@@@@@2");
     const userInfo = useSelector((state: ReturnType<typeof Store>) => {
         return (state.userInfoSet.userInfo) as { [key: string]: any }
     })
@@ -41,7 +42,7 @@ const UserProfile = ({ props }) => {
     )
 };
 const BoardList = ({ item }) => {
-    console.log(item);
+    console.log('게시판리스트@@@@@@@@@@@@@');
     return (
         <div className="tr">
             <Link className="td td1" to={{
@@ -59,7 +60,7 @@ const BoardList = ({ item }) => {
     )
 }
 const MyClass = (props) => {
-    console.log(props);
+    console.log('내강의실@@@@@@@@@@@@@');
     const [dashboard, dashboardUpdate] = useState<{ [key: string]: any }>({});
     const getMyLecture = () => {
         axios.all([axios.post("", { action: "get_top_count" }),

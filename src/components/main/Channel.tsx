@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 SwiperCore.use([Navigation]);
 const Channel = (prop) => {
+    console.log('채널@@@@@@@@@@@@@@@@@@@')
     return (
         <div className="section swiper_section blog-section" >
             <div className="title-header">

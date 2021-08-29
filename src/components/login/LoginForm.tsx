@@ -25,21 +25,26 @@ const LoginForm = () => {
     // admin
     // dnlwmvpdl#0119
     const login = () => {
-        console.log(userid, userpw);
+        console.log('로그인실행함수호출@@@@@@@@@@@@@@@@@@');
         const data = {
             action: "login",
-            userid: "admin",
-            userpw: "dnlwmvpdl#0119"
+            userid: userid,
+            userpw: userpw
         }
         if (data.userid.trim().length == 0 || data.userpw.trim().length == 0) {
             dispatch(toggle.modalAction({ guideMsgModal: true, guideMessage: "아이디 또는 비밀번호를 입력해주세요", mask: true }));
         } else {
             axios.post("", JSON.stringify(data)).then((result) => {
                 console.log(result)
-                dispatch(user.userInfoSet({
-                    userInfo: result.data.data[0].info
-                }))
-                setCookie('user_info', result.data.data[0]);
+                if (result.data.error) {
+                    dispatch(toggle.modalAction({ guideMsgModal: true, guideMessage: "아이디 또는 비밀번호가 틀렸습니다.", mask: true }));
+                } else {
+                    dispatch(user.userInfoSet({
+                        userInfo: result.data.data[0].info
+                    }))
+                    setCookie('user_info', result.data.data[0]);
+                }
+
             })
         }
     }

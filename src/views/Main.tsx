@@ -6,14 +6,107 @@ import { useCookies } from 'react-cookie';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import BaseSearchInput from 'src/components/common/BaseSearchInput';
 import Category from 'src/components/main/Category';
-import LatestLecture from 'src/components/main/LatestLecture';
-import RecommendLecture from 'src/components/main/RecommendLecture';
-import Channel from 'src/components/main/Channel';
 import Hoc from 'src/components/Hoc';
 import SwiperCore, {
     Autoplay
 } from 'swiper/core';
 SwiperCore.use([Autoplay]);
+const Channel = (prop) => {
+    console.log('채널@@@@@@@@@@@@@@@@@@@')
+    return (
+        <div className="section swiper_section blog-section" >
+            <div className="title-header">
+                <h2 className="title">이지채널</h2>
+                <span className="more-view-btn" >전체보기</span
+                >
+            </div>
+            <Swiper
+                spaceBetween={8}
+                slidesPerView={2}
+                navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+                onSwiper={(swiper) => ""}
+                onSlideChange={() => ""}
+            >
+                {prop.channel != undefined ? prop.channel.map((item, index) => (
+                    <SwiperSlide key={index} className="slide">
+                        <div className="item">
+                            <span className="lecture-list">
+                                <img src={item.thumbnail} />
+                            </span>
+                            <h2 className="subtitle" v-html="list.title"></h2>
+                            <span className="date"
+                            >{item.wdate_format} {item.writer}</span
+                            >
+                        </div>
+                    </SwiperSlide>
+                )) : ""}
+            </Swiper>
+        </div >
+    )
+}
+const LectureList = (prop) => {
+    console.log(prop);
+    return (
+        <div className="section swiper_section" >
+            <div className="title-header">
+                <h2 className="title">{prop.title}</h2>
+                <Link to={{
+                    pathname: "/category", state: {
+                        title: "전체",
+                        category_code: "ALL",
+                        action: "get_course_list",
+                        keyword: "",
+                        pageCurrent: 1,
+                        order: prop.title == '추천강의' ? 'type_rating' : 'type_date',
+                    }
+                }} className="more-view-btn" >전체보기</Link>
+            </div>
+            <Swiper
+                spaceBetween={8}
+                slidesPerView={2}
+                navigation
+                pagination={{ clickable: true }}
+                scrollbar={{ draggable: true }}
+                onSwiper={(swiper) => ""}
+                onSlideChange={() => ""}
+            >
+                {prop.lecture != undefined ? prop.lecture.map((item, index) => (
+                    <SwiperSlide key={index} className="slide">
+                        <div className="item">
+                            <Link to={{
+                                pathname: "/lectureDetail",
+                                state: {
+                                    id: item.id
+                                }
+                            }}>
+                                <span className="lecture-list">
+                                    <img src={item.image_url} />
+                                </span>
+                            </Link>
+                            <div className="evaluate">
+                                <h4 >{item.teachers}</h4>
+                                <h2 className="subtitle">{item.title}</h2>
+                                <span className="score">{item.ranking}</span>
+                                {item.price.is_free ? <h1 className="free">
+                                    FREE
+                                </h1> : <span className="price" >
+                                    {item.price.format_original != item.price.format_final ? <del
+                                        className="original"
+                                    >{item.price.format_original}</del> : ""
+                                    }
+                                    <span className="final">{item.price.format_final}</span>
+                                </span>
+                                }
+                            </div>
+                        </div>
+                    </SwiperSlide>
+                )) : ""}
+            </Swiper>
+        </div >
+    )
+}
 const Main = ({ data }) => {
     console.log('Main========================================', data);
     const title = useRef([
@@ -91,9 +184,9 @@ const Main = ({ data }) => {
                 </BaseSearchInput>
             </div>
             <Category></Category>
-            <RecommendLecture lecture={data.popular_lecture}></RecommendLecture>
+            <LectureList title="추천강의" lecture={data.popular_lecture}></LectureList>
             <Channel channel={data.techblog_post}></Channel>
-            <LatestLecture lecture={data.latest_lecture}></LatestLecture>
+            <LectureList title="인기강의" lecture={data.latest_lecture}></LectureList>
         </main >
     )
 }
