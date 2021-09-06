@@ -5,6 +5,7 @@ import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
 const LectureList = (props: { [key: string]: any }) => {
     const locationState = props.location.state;
+    console.log(props);
     const [listInfo, listUpdate] = useState<{ [key: string]: any }>({})
     const history = useHistory();
     const detail = (id) => {

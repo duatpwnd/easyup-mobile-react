@@ -30,6 +30,7 @@ axios.interceptors.request.use(request => {
 
 axios.interceptors.response.use(response => {
   if (response.data.type == "token") {
+    console.log('토큰에러');
     // 토큰이없을경우 마지막 url 기억
     // store.commit("userStore/referer", router.currentRoute.fullPath);
     store.dispatch({

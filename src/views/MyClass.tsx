@@ -2,10 +2,48 @@ import MyClassGnb from "src/components/gnb/MyClassGnb"
 import Store from "src/reducers/index"
 import axios from 'axios';
 import "./MyClass.scoped.scss"
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import ProgressBar from "src/components/common/ProgressBar";
+import SwiperCore, { Navigation } from 'swiper';
+import Pagination from "src/components/common/Pagination";
+const TimeLine = ((props) => {
+    const locationState = props.location;
+    const [timeLineInfo, timeLineUpdate] = useState<{ [key: string]: any } | null>(null)
+    console.log('타임라인@@@@@@@@@@', locationState, timeLineInfo);
+    const getDashboardTimeline = (num: number) => {
+        const obj = {
+            action: "get_dashboard_timeline",
+            current: num,
+        }
+        axios.post("", JSON.stringify(obj)).then((result) => {
+            console.log('타임라인결과:', result);
+            timeLineUpdate(result.data.data)
+        })
+    }
+    useEffect(() => {
+        getDashboardTimeline(1);
+    }, [])
+    return (
+        <section className="timeLine">
+            <h2 className="title">타임라인</h2>
+            <Swiper
+                slidesPerView={1}
+            >
+                {timeLineInfo != null ? timeLineInfo.list.map((item, index) =>
+                    <SwiperSlide key={index} className="slide">
+                        <h2>{item.login_date}</h2>
+                        <img src={item.course_image} />
+                        <p className="timeline_txt" dangerouslySetInnerHTML={{ __html: item.showTxt }}></p>
+                    </SwiperSlide>
+                ) : null}
+            </Swiper>
+            <Pagination to={{ pageCurrent: 1 }} total={timeLineInfo?.totalPage}></Pagination>
+        </section>
+    )
+})
 const UserProfile = ({ props }) => {
     console.log("유저프로필@@@@@@@@@@@2");
     const userInfo = useSelector((state: ReturnType<typeof Store>) => {
@@ -44,17 +82,22 @@ const UserProfile = ({ props }) => {
 const BoardList = ({ item }) => {
     console.log('게시판리스트@@@@@@@@@@@@@');
     return (
-        <div className="tr">
+        <div className="tr subscribed_lec">
             <Link className="td td1" to={{
                 pathname: "/play",
                 state: {
                     course_id: item.id,
                     lp_id: item.lp_id,
                 }
-            }}>{item.title}
+            }} dangerouslySetInnerHTML={{ __html: item.title == undefined ? item.session_name : item.title }}>
             </Link>
             <span className="td_wrap">
                 <span className="td date">{item.expired_on}</span>
+                {item.progress != undefined && <ProgressBar max={100} value={item.progress}>
+                    <span className="percent">
+                        {item.progress}%
+                    </span>
+                </ProgressBar>}
             </span>
         </div>
     )
@@ -112,7 +155,15 @@ const MyClass = (props) => {
                 {dashboard.list.ing_course.map((item, index) => {
                     return <BoardList item={item} key={index}></BoardList>
                 })}
+                <h2>현재 구독중인 코스</h2>
+                {dashboard.list.ing_session.length == 0 && <span className="no_register">진행중인 강의가 없습니다.</span>
+                }
+                {dashboard.list.ing_session.map((item, index) => {
+                    return <BoardList item={item} key={index}></BoardList>
+                })}
+                <TimeLine></TimeLine>
             </div>}
+
             <MyClassGnb></MyClassGnb>
         </div>
     )

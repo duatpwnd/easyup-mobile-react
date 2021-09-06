@@ -95,3 +95,104 @@
     }
   }
 }
+.contents {
+  padding: 4.445%;
+  padding-top: 0;
+  margin-top: 20px;
+  h2 {
+    font-size: 18px;
+    &:not(:first-child) {
+      margin-top: 20px;
+    }
+  }
+  .no_register {
+    font-size: 14px;
+    margin-top: 3px;
+    display: inline-block;
+  }
+  .tr {
+    width: 100%;
+    margin-top: 3px;
+    .td {
+      display: inline-block;
+      font-size: 14px;
+      color: #666666;
+      vertical-align: middle;
+    }
+    .td1 {
+      width: 60%;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .td2 {
+      font-weight: bold;
+      width: 40%;
+      text-align: right;
+      color: #333333;
+    }
+    .date {
+      color: black;
+      font-weight: bold;
+    }
+  }
+  .subscribed_lec {
+    .td_wrap {
+      width: 40%;
+      text-align: right;
+      vertical-align: middle;
+      display: inline-block;
+      .progress_bar {
+        width: 45%;
+        margin: 0;
+        margin-left: 5px;
+        height: 16px;
+        position: relative;
+        border: 1px solid #cacaca;
+        .percent {
+          color: #757575;
+          height: 12px;
+          line-height: 13px;
+          text-align: center;
+          font-size: 12px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          margin: auto;
+          z-index: 2;
+        }
+      }
+    }
+  }
+}
+.timeLine {
+  margin-top: 20px;
+  .title {
+    font-size: 18px;
+  }
+  .timeline_txt {
+    font-size: 15px;
+    margin-top: 5px;
+  }
+  .table {
+    display: table;
+    width: 100%;
+    margin-top: 1%;
+    .td {
+      display: table-cell;
+      font-size: 1.5rem;
+      color: #666666;
+    }
+    .td1 {
+      width: 70%;
+    }
+    .td2 {
+      width: 30%;
+      font-weight: bold;
+      text-align: right;
+      color: #333333;
+    }
+  }
+}
