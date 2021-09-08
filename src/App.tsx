@@ -14,10 +14,10 @@ import MyClass from "./views/MyClass"
 import LectureDetail from "./views/LectureDetail"
 import styled from "styled-components";
 import LectureList from "src/views/LectureList"
-import * as toggle from "src/action/modal"
-import * as user from "src/action/userInfo"
 import LoginForm from "components/login/LoginForm"
 import LoginGnb from "components/login/LoginGnb"
+import * as toggle from "src/action/modal"
+import * as user from "src/action/userInfo"
 const Mask = () => {
   const { mask } = useSelector((state: ReturnType<typeof Store>) => {
     return state.modalState
@@ -42,8 +42,7 @@ const LoginModal = () => {
 const GuideModal = () => {
   const { guideMsgModal, guideMessage } = useSelector((state: ReturnType<typeof Store>) => {
     return state.modalState
-  })
-  console.log(guideMsgModal);
+  });
   return guideMsgModal ? <StyledDiv>
     <P className="contents" dangerouslySetInnerHTML={{ __html: guideMessage as string }}>
     </P>
@@ -93,7 +92,7 @@ const App = () => {
       <Route path="/signUp" component={SignUp}></Route>
       <Route path="/pwFind"></Route>
       <Route path="/csCenter" component={CsCenter}></Route>
-      <Route path="/myClass" component={MyClass}></Route>
+      <Route exact path="/myClass" component={MyClass}></Route>
       <Route path="/LectureDetail" component={LectureDetail}></Route>
       <Route path="/category" component={LectureList}></Route>
       <Footer></Footer>

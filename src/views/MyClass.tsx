@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import ProgressBar from "src/components/common/ProgressBar";
-import SwiperCore, { Navigation } from 'swiper';
 import Pagination from "src/components/common/Pagination";
 const TimeLine = ((props) => {
     const locationState = props.location;

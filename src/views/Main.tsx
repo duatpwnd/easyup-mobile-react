@@ -193,6 +193,7 @@ const Main = ({ data }) => {
 export default Hoc({
     action: "main_page_list",
 })(React.memo(Main, (prev, next) => {
+    console.log('@@@@@@@@@@@@@@@a', prev, next);
     if (prev.data != next.data) {
         return false;
     } else {
