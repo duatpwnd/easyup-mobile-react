@@ -15,9 +15,9 @@ const Footer = withRouter(({ match, location }) => {
                 title="EASYUP"
             />
             <div className="gnb">
-                <Link to="/policy">이용약관</Link>
+                <Link to="/policy/1">이용약관</Link>
                 <span className="bar">|</span>
-                <Link to="/policy">개인정보취급방침</Link>
+                <Link to="/policy/2">개인정보취급방침</Link>
                 <span className="bar">|</span>
                 <Link to="/help/notice">고객센터</Link>
             </div>

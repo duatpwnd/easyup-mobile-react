@@ -1,8 +1,6 @@
 import "./CsCenter.scoped.scss"
-import { useEffect } from "react";
-import { NavLink, Link, Route } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 import NoticeList from "src/views/cs-center/NoticeList";
-import axios from 'axios';
 const CsCenter = ({ match, location }) => {
     const activeStyle = {
         color: "black",

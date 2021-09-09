@@ -16,6 +16,7 @@ import styled from "styled-components";
 import LectureList from "src/views/LectureList"
 import LoginForm from "components/login/LoginForm"
 import LoginGnb from "components/login/LoginGnb"
+import Policy from "src/views/Policy"
 import * as toggle from "src/action/modal"
 import * as user from "src/action/userInfo"
 const Mask = () => {
@@ -95,6 +96,7 @@ const App = () => {
       <Route exact path="/myClass" component={MyClass}></Route>
       <Route path="/LectureDetail" component={LectureDetail}></Route>
       <Route path="/category" component={LectureList}></Route>
+      <Route path="/policy/:id" component={Policy}></Route>
       <Footer></Footer>
     </div>
   )
